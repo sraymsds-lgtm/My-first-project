@@ -206,3 +206,27 @@ c4_matrix.index.name = 'Horizon (Day)'
 print("\n--- Table C.4: Full 15-Day FEVD Horizon Array for Target Node: WB_Onion ---")
 print(c4_matrix.to_markdown(floatfmt=".2f"))
 print("="*80)
+
+# STEP 9: EXPORT COMPLETE 24-MONTH STRUCTURAL DATASET FOR REPOSITORY
+# =====================================================================
+print("\n" + "="*80)
+print("          EXPORTING MULTIVARIATE DATASET FOR DEPLOYMENT          ")
+print("="*80)
+
+# 1. Prepare the final DataFrame for open-source hosting
+hosting_dataset = appendix_data.copy()
+
+# 2. Format the index name and date layout so it loads cleanly into Kaggle/GitHub
+hosting_dataset.index.name = 'Date'
+
+# 3. Export to a standardized CSV file
+output_filename = 'Nashik_Kolkata_Corridor_Daily_Prices_2024_2026.csv'
+hosting_dataset.to_csv(output_filename, index=True)
+
+# 4. Print telemetry details so you can verify the export size
+total_rows = len(hosting_dataset)
+print(f"SUCCESS: Complete dataset successfully compiled and saved!")
+print(f"File Name   : {output_filename}")
+print(f"Total Rows  : {total_rows} consecutive calendar days")
+print(f"Data Schema : {list(hosting_dataset.columns)}")
+print("="*80)
